@@ -120,12 +120,12 @@ class Turnaj extends CI_Controller {
 
 
 	// Zobrazenie detailu o teplote
-	public function view($id){
+	public function view($idTurnaj){
 		$data = array();
 
 		//kontrola, ci bolo zaslane id riadka
-		if(!empty($id)){
-			$data['temperatures'] = $this->Turnaj_model->getRows($id);
+		if(!empty($idTurnaj)){
+			$data['temperatures'] = $this->Turnaj_model->getRows($idTurnaj);
 			$data['title'] = $data['temperatures']['measurement_date'];
 
 			//nahratie detailu zaznamu
@@ -185,10 +185,10 @@ class Turnaj extends CI_Controller {
 	}
 
 	// aktualizacia dat
-	public function edit($id){
+	public function edit($idTurnaj){
 		$data = array();
 		//ziskanie dat z tabulky
-		$postData = $this->Turnaj_model->getRows($id);
+		$postData = $this->Turnaj_model->getRows($idTurnaj);
 
 		//zistenie, ci bola zaslana poziadavka na aktualizaciu
 		if($this->input->post('postSubmit')){
@@ -201,7 +201,7 @@ class Turnaj extends CI_Controller {
 			// priprava dat pre aktualizaciu
 			$postData = array(
 				'measurement_date' => $this->input->post('measurement_date'),
-				'temperature' => $this->input->post('temperature'),
+				'turnaj' => $this->input->post('turnaj'),
 				'sky' => $this->input->post('sky'),
 				'user' => $this->input->post('user'),
 				'description' => $this->input->post('description'),
@@ -210,7 +210,7 @@ class Turnaj extends CI_Controller {
 			//validacia zaslanych dat
 			if($this->form_validation->run() == true){
 				//aktualizacia dat
-				$update = $this->Turnaj_model->update($postData, $id);
+				$update = $this->Turnaj_model->update($postData, $idTurnaj);
 
 				if($update){
 					$this->session->set_userdata('success_msg', 'Temperature has been updated successfully.');
@@ -224,7 +224,7 @@ class Turnaj extends CI_Controller {
 		$data['users'] = $this->Turnaj_model->get_users_dropdown();
 		$data['users_selected'] = $postData['user'];
 		$data['post'] = $postData;
-		$data['title'] = 'Update Temperature';
+		$data['title'] = 'Update Turnaje';
 		$data['action'] = 'Edit';
 
 		//zobrazenie formulara pre vlozenie a editaciu dat
@@ -234,11 +234,11 @@ class Turnaj extends CI_Controller {
 	}
 
 	// odstranenie dat
-	public function delete($id){
+	public function delete($idTurnaj){
 		//overenie, ci id nie je prazdne
-		if($id){
+		if($idTurnaj){
 			//odstranenie zaznamu
-			$delete = $this->Turnaj_model->delete($id);
+			$delete = $this->Turnaj_model->delete($idTurnaj);
 
 			if($delete){
 				$this->session->set_userdata('success_msg', 'Temperature has been removed successfully.');
