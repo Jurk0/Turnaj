@@ -133,7 +133,7 @@ class Turnaj extends CI_Controller {
 			$this->load->view('temperatures/view', $data);
 			$this->load->view('templates/footer');
 		}else{
-			redirect('/temperatures');
+			redirect('/Turnaj');
 		}
 	}
 
@@ -166,7 +166,7 @@ class Turnaj extends CI_Controller {
 
 				if($insert){
 					$this->session->set_userdata('success_msg', 'Temperature has been added successfully.');
-					redirect('/temperatures');
+					redirect('/Turnaj');
 				}else{
 					$data['error_msg'] = 'Some problems occurred, please try again.';
 				}
@@ -214,7 +214,7 @@ class Turnaj extends CI_Controller {
 
 				if($update){
 					$this->session->set_userdata('success_msg', 'Temperature has been updated successfully.');
-					redirect('/temperatures');
+					redirect('/Turnaj');
 				}else{
 					$data['error_msg'] = 'Some problems occurred, please try again.';
 				}
@@ -247,6 +247,6 @@ class Turnaj extends CI_Controller {
 			}
 		}
 
-		redirect('/turnament');
+		redirect('/Turnaj');
 	}
 }

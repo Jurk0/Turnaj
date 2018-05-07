@@ -17,7 +17,7 @@
 
         function drawChart() {
             var jsonData = $.ajax({
-                url: "<?php echo base_url() . 'index.php/turnaj/json_records_per_user' ?>",
+                url: "<?php echo base_url() . 'index.php/Turnaj/json_records_per_user' ?>",
                 dataType: "json",
                 async: false
             }).responseText;
